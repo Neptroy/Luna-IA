@@ -1,15 +1,52 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Bot, Mail, Lock, User, ArrowRight } from 'lucide-react';
+import { supabase } from '../lib/supabase';
+import { Bot, Mail, Lock, User, ArrowRight, Loader2, AlertCircle } from 'lucide-react';
+
+import { useTranslation } from 'react-i18next';
 
 export default function Auth() {
+    const { t } = useTranslation();
     const [isLogin, setIsLogin] = useState(true);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [hotelName, setHotelName] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Simulate login for now
-        navigate('/dashboard');
+        setLoading(true);
+        setError(null);
+
+        try {
+            if (isLogin) {
+                const { error } = await supabase.auth.signInWithPassword({
+                    email,
+                    password,
+                });
+                if (error) throw error;
+            } else {
+                const { error } = await supabase.auth.signUp({
+                    email,
+                    password,
+                    options: {
+                        data: {
+                            hotel_name: hotelName
+                        }
+                    }
+                });
+                if (error) throw error;
+                alert(t('auth.alert_created'));
+            }
+            navigate('/dashboard');
+        } catch (err: unknown) {
+            const errorMessage = err instanceof Error ? err.message : 'Ocorreu um erro inesperado';
+            setError(errorMessage);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -28,52 +65,77 @@ export default function Auth() {
 
                 <div className="glass border border-white/10 rounded-3xl p-8 shadow-2xl">
                     <h2 className="text-2xl font-bold text-white mb-2 text-center">
-                        {isLogin ? 'Bienvenido de nuevo' : 'Crea tu cuenta'}
+                        {isLogin ? t('auth.welcome_back') : t('auth.create_account')}
                     </h2>
                     <p className="text-gray-400 text-center mb-8 text-sm">
-                        {isLogin ? 'Accede a tu panel de control hotelero.' : 'Comienza a automatizar tu hotel hoy mismo.'}
+                        {isLogin ? t('auth.login_subtitle') : t('auth.register_subtitle')}
                     </p>
+
+                    {error && (
+                        <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl flex items-center gap-3 text-red-500 text-sm">
+                            <AlertCircle size={18} />
+                            {error}
+                        </div>
+                    )}
 
                     <form onSubmit={handleSubmit} className="space-y-4">
                         {!isLogin && (
                             <div className="space-y-2">
-                                <label className="text-sm font-medium text-gray-300 ml-1">Nombre del Hotel</label>
+                                <label className="text-sm font-medium text-gray-300 ml-1">{t('auth.hotel_name')}</label>
                                 <div className="relative">
                                     <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
                                     <input
                                         type="text"
-                                        placeholder="Hotel Elegante"
+                                        required
+                                        value={hotelName}
+                                        onChange={(e) => setHotelName(e.target.value)}
+                                        placeholder={t('auth.hotel_name')}
                                         className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white focus:border-gold outline-none transition-all"
                                     />
                                 </div>
                             </div>
                         )}
                         <div className="space-y-2">
-                            <label className="text-sm font-medium text-gray-300 ml-1">Correo Electrónico</label>
+                            <label className="text-sm font-medium text-gray-300 ml-1">{t('auth.email')}</label>
                             <div className="relative">
                                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
                                 <input
                                     type="email"
-                                    placeholder="tu@email.com"
+                                    required
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder={t('auth.email')}
                                     className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white focus:border-gold outline-none transition-all"
                                 />
                             </div>
                         </div>
                         <div className="space-y-2">
-                            <label className="text-sm font-medium text-gray-300 ml-1">Contraseña</label>
+                            <label className="text-sm font-medium text-gray-300 ml-1">{t('auth.password')}</label>
                             <div className="relative">
                                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
                                 <input
                                     type="password"
+                                    required
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                     placeholder="••••••••"
                                     className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white focus:border-gold outline-none transition-all"
                                 />
                             </div>
                         </div>
 
-                        <button className="w-full bg-gold text-navy py-4 rounded-xl font-bold text-lg hover:bg-gold-light transition-all flex items-center justify-center gap-2 mt-4">
-                            {isLogin ? 'Entrar' : 'Registrarse'}
-                            <ArrowRight size={20} />
+                        <button
+                            disabled={loading}
+                            className="w-full bg-gold text-navy py-4 rounded-xl font-bold text-lg hover:bg-gold-light transition-all flex items-center justify-center gap-2 mt-4 disabled:opacity-50"
+                        >
+                            {loading ? (
+                                <Loader2 className="animate-spin" size={24} />
+                            ) : (
+                                <>
+                                    {isLogin ? t('auth.login_btn') : t('auth.register_btn')}
+                                    <ArrowRight size={20} />
+                                </>
+                            )}
                         </button>
                     </form>
 
@@ -82,7 +144,7 @@ export default function Auth() {
                             onClick={() => setIsLogin(!isLogin)}
                             className="text-gray-400 text-sm hover:text-gold transition-colors"
                         >
-                            {isLogin ? '¿No tienes cuenta? Regístrate' : '¿Ya tienes cuenta? Inicia sesión'}
+                            {isLogin ? t('auth.toggle_register') : t('auth.toggle_login')}
                         </button>
                     </div>
                 </div>

@@ -1,0 +1,113 @@
+{
+    "common": {
+        "loading": "Carregando...",
+        "error": "Erro",
+        "success": "Sucesso",
+        "saved": "Salvo",
+        "save_changes": "Salvar Alterações",
+        "search": "Buscar...",
+        "active_now": "Ativo agora"
+    },
+    "landing": {
+        "menu": {
+            "benefits": "Benefícios",
+            "about": "Sobre Nós",
+            "login": "Entrar"
+        },
+        "hero": {
+            "badge": "O FUTURO DA HOSPITALIDADE",
+            "title_1": "Seu Hotel no",
+            "title_2": "Piloto Automático",
+            "subtitle": "Luna IA gerencia reservas, responde dúvidas e coordena o check-in dos seus hóspedes através do WhatsApp, 24 horas por dia.",
+            "cta_primary": "Começar Agora",
+            "cta_secondary": "Ver Demo"
+        },
+        "features": {
+            "title": "Potencialize sua Operação",
+            "subtitle": "Tecnologia de ponta projetada para maximizar a satisfação do hóspede e minimizar sua carga de trabalho.",
+            "whatsapp_title": "Reservas pelo WhatsApp",
+            "whatsapp_desc": "Converta conversas em reservas confirmadas instantaneamente sem intervenção humana.",
+            "calendar_title": "Gestão Inteligente",
+            "calendar_desc": "Calendário unificado que sincroniza disponibilidade e preços em tempo real.",
+            "security_title": "Segurança Total",
+            "security_desc": "Seus dados estão protegidos com criptografia de nível bancário."
+        },
+        "footer": {
+            "tagline": "A inteligência artificial que redefine a hospitalidade moderna.",
+            "terms": "Termos",
+            "privacy": "Privacidade",
+            "contact": "Contato"
+        }
+    },
+    "auth": {
+        "welcome_back": "Bem-vindo de volta",
+        "create_account": "Crie sua conta",
+        "login_subtitle": "Acesse seu painel de controle hoteleiro.",
+        "register_subtitle": "Comece a automatizar seu hotel hoje mesmo.",
+        "hotel_name": "Nome do Hotel",
+        "email": "E-mail",
+        "password": "Senha",
+        "login_btn": "Entrar",
+        "register_btn": "Cadastrar",
+        "toggle_register": "Não tem conta? Cadastre-se",
+        "toggle_login": "Já tem conta? Fazer login",
+        "alert_created": "Conta criada! Verifique seu e-mail para confirmar."
+    },
+    "dashboard": {
+        "sidebar": {
+            "messages": "Mensagens",
+            "reservations": "Reservas",
+            "rooms": "Quartos",
+            "guests": "Hóspedes",
+            "config": "Configuração",
+            "logout": "Sair"
+        },
+        "header": {
+            "subtitle": "Painel de controle Luna IA"
+        }
+    },
+    "config": {
+        "title": "Configuração do Hotel",
+        "subtitle": "Gerencie os dados públicos e técnicos da sua propriedade.",
+        "general_info": "Informações Gerais",
+        "address": "Endereço Físico",
+        "currency": "Moeda",
+        "timezone": "Fuso Horário",
+        "technical_config": "Configuração Técnica",
+        "automation_note": "Luna IA enviará mensagens automáticas de boas-vindas 24 horas antes do check-in."
+    },
+    "rooms": {
+        "empty": "Nenhum quarto encontrado.",
+        "available": "Disponível",
+        "occupied": "Ocupado",
+        "manage": "Gerenciar",
+        "details": "Ver Detalhes",
+        "night": "/noite",
+        "people": "Pess.",
+        "services": "Serv."
+    },
+    "guests": {
+        "title": "Base de Dados de Hóspedes",
+        "placeholder": "Buscar por nome ou telefone...",
+        "empty": "Nenhum hóspede encontrado.",
+        "columns": {
+            "guest": "Hóspede",
+            "contact": "Contato",
+            "member_since": "Membro desde",
+            "actions": "Ações"
+        }
+    },
+    "calendar": {
+        "filter": "Filtrar",
+        "new": "Nova",
+        "upcoming": "Próximas Reservas",
+        "empty_upcoming": "Nenhuma reserva próxima.",
+        "status": {
+            "pending": "Pendente",
+            "confirmed": "Confirmada",
+            "checked_in": "Check-in",
+            "completed": "Concluída",
+            "cancelled": "Cancelada"
+        }
+    }
+}

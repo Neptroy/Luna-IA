@@ -1,0 +1,113 @@
+{
+    "common": {
+        "loading": "Cargando...",
+        "error": "Error",
+        "success": "Éxito",
+        "saved": "Guardado",
+        "save_changes": "Guardar Cambios",
+        "search": "Buscar...",
+        "active_now": "Activo ahora"
+    },
+    "landing": {
+        "menu": {
+            "benefits": "Beneficios",
+            "about": "Sobre Nosotros",
+            "login": "Iniciar Sesión"
+        },
+        "hero": {
+            "badge": "EL FUTURO DE LA HOSPITALIDAD",
+            "title_1": "Tu Hotel en",
+            "title_2": "Piloto Automático",
+            "subtitle": "Luna IA gestiona reservas, responde dudas y coordina el check-in de tus huéspedes a través de WhatsApp, 24/7.",
+            "cta_primary": "Empezar Ahora",
+            "cta_secondary": "Ver Demo"
+        },
+        "features": {
+            "title": "Potencia tu Operación",
+            "subtitle": "Tecnología de vanguardia diseñada para maximizar la satisfacción del huésped y minimizar tu carga de trabajo.",
+            "whatsapp_title": "Reservas por WhatsApp",
+            "whatsapp_desc": "Convierte chats en reservas confirmadas instantáneamente sin intervención humana.",
+            "calendar_title": "Gestión Inteligente",
+            "calendar_desc": "Calendario unificado que sincroniza disponibilidad y precios en tiempo real.",
+            "security_title": "Seguridad Total",
+            "security_desc": "Tus datos están protegidos con encriptación de grado bancario."
+        },
+        "footer": {
+            "tagline": "La inteligencia artificial que redefine la hospitalidad moderna.",
+            "terms": "Términos",
+            "privacy": "Privacidad",
+            "contact": "Contacto"
+        }
+    },
+    "auth": {
+        "welcome_back": "Bienvenido de nuevo",
+        "create_account": "Crea tu cuenta",
+        "login_subtitle": "Accede a tu panel de control hotelero.",
+        "register_subtitle": "Comienza a automatizar tu hotel hoy mismo.",
+        "hotel_name": "Nombre del Hotel",
+        "email": "Correo Electrónico",
+        "password": "Contraseña",
+        "login_btn": "Entrar",
+        "register_btn": "Registrarse",
+        "toggle_register": "¿No tienes cuenta? Regístrate",
+        "toggle_login": "¿Ya tienes cuenta? Inicia sesión",
+        "alert_created": "¡Cuenta creada! Revisa tu email para confirmar."
+    },
+    "dashboard": {
+        "sidebar": {
+            "messages": "Mensajes",
+            "reservations": "Reservas",
+            "rooms": "Habitaciones",
+            "guests": "Huéspedes",
+            "config": "Configuración",
+            "logout": "Cerrar Sesión"
+        },
+        "header": {
+            "subtitle": "Panel de control de Luna IA"
+        }
+    },
+    "config": {
+        "title": "Configuración del Hotel",
+        "subtitle": "Administra los datos públicos y técnicos de tu propiedad.",
+        "general_info": "Información General",
+        "address": "Dirección Física",
+        "currency": "Moneda",
+        "timezone": "Zona Horaria",
+        "technical_config": "Configuración Técnica",
+        "automation_note": "Luna IA enviará mensajes automáticos de bienvenida 24 horas antes del check-in."
+    },
+    "rooms": {
+        "empty": "No se encontraron habitaciones.",
+        "available": "Disponible",
+        "occupied": "Ocupada",
+        "manage": "Gestionar",
+        "details": "Ver Detalles",
+        "night": "/noche",
+        "people": "Pers.",
+        "services": "Serv."
+    },
+    "guests": {
+        "title": "Base de Datos de Huéspedes",
+        "placeholder": "Buscar por nombre o teléfono...",
+        "empty": "No se encontraron huéspedes.",
+        "columns": {
+            "guest": "Huésped",
+            "contact": "Contacto",
+            "member_since": "Miembro desde",
+            "actions": "Acciones"
+        }
+    },
+    "calendar": {
+        "filter": "Filtrar",
+        "new": "Nueva",
+        "upcoming": "Próximas Reservas",
+        "empty_upcoming": "No hay reservas próximas.",
+        "status": {
+            "pending": "Pendiente",
+            "confirmed": "Confirmada",
+            "checked_in": "Check-in",
+            "completed": "Completada",
+            "cancelled": "Cancelada"
+        }
+    }
+}

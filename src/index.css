@@ -1,11 +1,51 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  --navy: #1e3a5f;
-  --gold: #d4af37;
-  --white: #ffffff;
+@theme {
+  --color-navy: #1e3a5f;
+  --color-navy-dark: #162b46;
+  --color-navy-light: #2a5286;
+
+  --color-gold: #d4af37;
+  --color-gold-dark: #b08d2b;
+  --color-gold-light: #e5c560;
+
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --animate-fade-in: fadeIn 0.5s ease-out;
+  --animate-slide-up: slideUp 0.5s ease-out;
+  --animate-slide-in-right: slideInRight 0.3s ease-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+    }
+
+    to {
+      transform: translateX(0);
+    }
+  }
 }
 
 @layer base {
@@ -14,18 +54,50 @@
   }
 }
 
+@layer utilities {
+  .glass-premium {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
+  .gold-gradient {
+    background: linear-gradient(135deg, #d4af37 0%, #f1d592 50%, #b08d2b 100%);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.2);
+    border-radius: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(212, 175, 55, 0.4);
+  }
+}
+
 .glass {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.125);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .navy-gradient {
-  background: linear-gradient(135deg, #1e3a5f 0%, #162b46 100%);
+  background: radial-gradient(circle at top left, #1e3a5f 0%, #162b46 100%);
 }
 
 .gold-text {
-  background: linear-gradient(to right, #d4af37, #e5c560);
+  background: linear-gradient(135deg, #d4af37 0%, #f1d592 50%, #b08d2b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

@@ -13,6 +13,8 @@ import {
     Menu
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+import { useTranslation } from 'react-i18next';
 
 interface NavItemProps {
     icon: React.ReactNode;
@@ -44,24 +46,40 @@ import ConfigurationForm from '../components/Dashboard/ConfigurationForm';
 import GuestsTable from '../components/Dashboard/GuestsTable';
 
 export default function Dashboard() {
-    const [activeTab, setActiveTab] = useState('mensajes');
+    const { user, signOut } = useAuth();
+    const [activeTab, setActiveTab] = useState('mensagens');
     const [collapsed, setCollapsed] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
+    const { t } = useTranslation();
+
+    const handleLogout = async () => {
+        await signOut();
+        navigate('/');
+    };
 
     const tabs = [
-        { id: 'mensajes', label: 'Mensajes', icon: <MessageSquare size={20} /> },
-        { id: 'reservas', label: 'Reservas', icon: <Calendar size={20} /> },
-        { id: 'habitaciones', label: 'Habitaciones', icon: <BedDouble size={20} /> },
-        { id: 'huespedes', label: 'Huéspedes', icon: <Users size={20} /> },
-        { id: 'config', label: 'Configuración', icon: <Settings size={20} /> },
+        { id: 'mensagens', label: t('dashboard.sidebar.messages'), icon: <MessageSquare size={20} /> },
+        { id: 'reservas', label: t('dashboard.sidebar.reservations'), icon: <Calendar size={20} /> },
+        { id: 'quartos', label: t('dashboard.sidebar.rooms'), icon: <BedDouble size={20} /> },
+        { id: 'hóspedes', label: t('dashboard.sidebar.guests'), icon: <Users size={20} /> },
+        { id: 'config', label: t('dashboard.sidebar.config'), icon: <Settings size={20} /> },
     ];
 
     return (
         <div className="flex h-screen bg-navy text-white overflow-hidden">
+            {/* Sidebar Overlay for Mobile */}
+            {isMobileMenuOpen && (
+                <div
+                    className="fixed inset-0 bg-navy/80 backdrop-blur-sm z-40 md:hidden"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                />
+            )}
+
             {/* Sidebar */}
             <aside
-                className={`bg-navy-dark border-r border-white/10 flex flex-col transition-all duration-300 ${collapsed ? 'w-20' : 'w-64'
-                    }`}
+                className={`fixed md:relative bg-navy-dark border-r border-white/10 flex flex-col transition-all duration-300 z-50 h-full ${collapsed ? 'w-20' : 'w-64'
+                    } ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}
             >
                 <div className="p-6 flex items-center gap-3">
                     <div className="w-10 h-10 bg-gold rounded-xl flex-shrink-0 flex items-center justify-center shadow-lg shadow-gold/20">
@@ -76,7 +94,10 @@ export default function Dashboard() {
                             key={tab.id}
                             {...tab}
                             isActive={activeTab === tab.id}
-                            onClick={() => setActiveTab(tab.id)}
+                            onClick={() => {
+                                setActiveTab(tab.id);
+                                setIsMobileMenuOpen(false);
+                            }}
                             collapsed={collapsed}
                         />
                     ))}
@@ -85,9 +106,9 @@ export default function Dashboard() {
                 <div className="p-4 border-t border-white/10">
                     <NavItem
                         icon={<LogOut size={20} />}
-                        label="Cerrar Sesión"
+                        label={t('dashboard.sidebar.logout')}
                         isActive={false}
-                        onClick={() => navigate('/')}
+                        onClick={handleLogout}
                         collapsed={collapsed}
                     />
                     <button
@@ -102,10 +123,18 @@ export default function Dashboard() {
             {/* Main Content */}
             <main className="flex-1 flex flex-col overflow-hidden">
                 {/* Header */}
-                <header className="h-20 border-b border-white/10 flex items-center justify-between px-8 bg-navy/50 backdrop-blur-md">
-                    <div>
-                        <h2 className="text-2xl font-bold capitalize">{activeTab}</h2>
-                        <p className="text-xs text-gray-500">Panel de control de Luna IA</p>
+                <header className="h-20 border-b border-white/10 flex items-center justify-between px-4 md:px-8 bg-navy/50 backdrop-blur-md">
+                    <div className="flex items-center gap-4">
+                        <button
+                            className="md:hidden p-2 text-gold hover:bg-white/5 rounded-lg transition-all"
+                            onClick={() => setIsMobileMenuOpen(true)}
+                        >
+                            <Menu size={20} />
+                        </button>
+                        <div>
+                            <h2 className="text-xl md:text-2xl font-bold capitalize">{activeTab}</h2>
+                            <p className="text-[10px] md:text-xs text-gray-500">{t('dashboard.header.subtitle')}</p>
+                        </div>
                     </div>
 
                     <div className="flex items-center gap-6">
@@ -121,19 +150,19 @@ export default function Dashboard() {
                             <Bell size={20} />
                             <span className="absolute top-1 right-1 w-2 h-2 bg-gold rounded-full" />
                         </button>
-                        <div className="w-10 h-10 rounded-full bg-gold/20 border border-gold/50 flex items-center justify-center text-gold font-bold">
-                            JD
+                        <div className="w-10 h-10 rounded-full bg-gold/20 border border-gold/50 flex items-center justify-center text-gold font-bold uppercase overflow-hidden text-xs">
+                            {user?.email?.substring(0, 2) || '??'}
                         </div>
                     </div>
                 </header>
 
                 {/* Tab Content */}
-                <div className="flex-1 overflow-y-auto p-8">
-                    {activeTab === 'mensajes' && <ChatInterface />}
-                    {activeTab === 'habitaciones' && <RoomsGrid />}
+                <div className="flex-1 overflow-y-auto p-4 md:p-8">
+                    {activeTab === 'mensagens' && <ChatInterface />}
+                    {activeTab === 'quartos' && <RoomsGrid />}
                     {activeTab === 'reservas' && <ReservationsCalendar />}
                     {activeTab === 'config' && <ConfigurationForm />}
-                    {activeTab === 'huespedes' && <GuestsTable />}
+                    {activeTab === 'hóspedes' && <GuestsTable />}
                 </div>
             </main>
         </div>

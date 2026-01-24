@@ -10,7 +10,7 @@ const TWILIO_ACCOUNT_SID = Deno.env.get('TWILIO_ACCOUNT_SID');
 const TWILIO_AUTH_TOKEN = Deno.env.get('TWILIO_AUTH_TOKEN');
 const TWILIO_FROM_NUMBER = Deno.env.get('TWILIO_FROM_NUMBER');
 
-Deno.serve(async (req: Request) => {
+Deno.serve(async (_req: Request) => {
     try {
         const tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
@@ -29,16 +29,36 @@ Deno.serve(async (req: Request) => {
         }
 
         for (const res of reservations) {
-            const message = `¡Hola ${res.guests.name}! Te recordamos tu check-in para mañana en la habitación ${res.rooms.name}. Te esperamos a partir de las 15:00.`;
+            const message = `¡Hola ${res.guests.name}! ✨ Te recordamos que tu estancia en Hotel Elegante comienza mañana en la habitación ${res.rooms.name}. El check-in está disponible desde las 15:00. ¡Te esperamos! 🏨`;
 
-            // Send via Twilio (Placeholder logic)
-            console.log(`Sending reminder to ${res.guests.phone}: ${message}`);
+            // 2. Send via Twilio
+            const auth = btoa(`${TWILIO_ACCOUNT_SID}:${TWILIO_AUTH_TOKEN}`);
+            const twilioRes = await fetch(
+                `https://api.twilio.com/2010-04-01/Accounts/${TWILIO_ACCOUNT_SID}/Messages.json`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Authorization': `Basic ${auth}`,
+                    },
+                    body: new URLSearchParams({
+                        To: `whatsapp:${res.guests.phone}`,
+                        From: TWILIO_FROM_NUMBER!,
+                        Body: message,
+                    }).toString(),
+                }
+            );
 
-            // Mark as sent
-            await supabase
-                .from('reservations')
-                .update({ reminder_sent: true })
-                .eq('id', res.id);
+            if (twilioRes.ok) {
+                // 3. Mark as sent
+                await supabase
+                    .from('reservations')
+                    .update({ reminder_sent: true })
+                    .eq('id', res.id);
+            } else {
+                const error = await twilioRes.json();
+                console.error(`Twilio Error for ${res.guests.phone}:`, error);
+            }
         }
 
         return new Response(`Sent ${reservations.length} reminders`, { status: 200 });

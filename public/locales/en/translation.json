@@ -1,0 +1,113 @@
+{
+    "common": {
+        "loading": "Loading...",
+        "error": "Error",
+        "success": "Success",
+        "saved": "Saved",
+        "save_changes": "Save Changes",
+        "search": "Search...",
+        "active_now": "Active now"
+    },
+    "landing": {
+        "menu": {
+            "benefits": "Benefits",
+            "about": "About Us",
+            "login": "Sign In"
+        },
+        "hero": {
+            "badge": "THE FUTURE OF HOSPITALITY",
+            "title_1": "Your Hotel on",
+            "title_2": "Autopilot",
+            "subtitle": "Luna IA manages reservations, answers questions, and coordinates check-in for your guests via WhatsApp, 24/7.",
+            "cta_primary": "Get Started",
+            "cta_secondary": "View Demo"
+        },
+        "features": {
+            "title": "Supercharge Your Operation",
+            "subtitle": "Cutting-edge technology designed to maximize guest satisfaction and minimize your workload.",
+            "whatsapp_title": "WhatsApp Reservations",
+            "whatsapp_desc": "Convert conversations into confirmed reservations instantly without human intervention.",
+            "calendar_title": "Smart Management",
+            "calendar_desc": "Unified calendar that synchronizes availability and pricing in real-time.",
+            "security_title": "Total Security",
+            "security_desc": "Your data is protected with bank-grade encryption."
+        },
+        "footer": {
+            "tagline": "The artificial intelligence redefining modern hospitality.",
+            "terms": "Terms",
+            "privacy": "Privacy",
+            "contact": "Contact"
+        }
+    },
+    "auth": {
+        "welcome_back": "Welcome back",
+        "create_account": "Create your account",
+        "login_subtitle": "Access your hotel control panel.",
+        "register_subtitle": "Start automating your hotel today.",
+        "hotel_name": "Hotel Name",
+        "email": "Email",
+        "password": "Password",
+        "login_btn": "Sign In",
+        "register_btn": "Sign Up",
+        "toggle_register": "No account? Sign up",
+        "toggle_login": "Already have an account? Sign in",
+        "alert_created": "Account created! Check your email to confirm."
+    },
+    "dashboard": {
+        "sidebar": {
+            "messages": "Messages",
+            "reservations": "Reservations",
+            "rooms": "Rooms",
+            "guests": "Guests",
+            "config": "Settings",
+            "logout": "Log Out"
+        },
+        "header": {
+            "subtitle": "Luna IA Control Panel"
+        }
+    },
+    "config": {
+        "title": "Hotel Configuration",
+        "subtitle": "Manage public and technical data for your property.",
+        "general_info": "General Information",
+        "address": "Physical Address",
+        "currency": "Currency",
+        "timezone": "Timezone",
+        "technical_config": "Technical Configuration",
+        "automation_note": "Luna IA will send automatic welcome messages 24 hours before check-in."
+    },
+    "rooms": {
+        "empty": "No rooms found.",
+        "available": "Available",
+        "occupied": "Occupied",
+        "manage": "Manage",
+        "details": "View Details",
+        "night": "/night",
+        "people": "Pers.",
+        "services": "Serv."
+    },
+    "guests": {
+        "title": "Guest Database",
+        "placeholder": "Search by name or phone...",
+        "empty": "No guests found.",
+        "columns": {
+            "guest": "Guest",
+            "contact": "Contact",
+            "member_since": "Member since",
+            "actions": "Actions"
+        }
+    },
+    "calendar": {
+        "filter": "Filter",
+        "new": "New",
+        "upcoming": "Upcoming Reservations",
+        "empty_upcoming": "No upcoming reservations.",
+        "status": {
+            "pending": "Pending",
+            "confirmed": "Confirmed",
+            "checked_in": "Checked In",
+            "completed": "Completed",
+            "cancelled": "Cancelled"
+        }
+    }
+}
